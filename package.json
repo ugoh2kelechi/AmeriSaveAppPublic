@@ -1,28 +1,19 @@
 {
-  "name": "amerisaveapp",
+  "name": "node-fullstack",
   "version": "1.0.0",
-  "description": "fullstack coding assesment ",
-  "main": "app.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ugoh2kelechi/amerisaveapp.git"
-  },
-  "keywords": [
-    "mortgage",
-    "app",
-    "nodejs",
-    "boostrap"
-  ],
-  "author": "kester",
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ugoh2kelechi/amerisaveapp/issues"
-  },
-  "homepage": "https://github.com/ugoh2kelechi/amerisaveapp#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "bootstrap": "^5.1.3",
+    "express": "^4.17.1",
+    "hbs": "^4.1.2",
+    "jquery": "^3.6.0",
+    "nodemon": "^2.0.13"
   }
 }

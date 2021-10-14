@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .display {
+            display: flex;
+            justify-content: space-around !important;
+        }
+
+            {
+                {
+                 !-- #footer {
+                    position: fixed;
+                    padding: 10px 10px 0px 10px;
+                    bottom: 0;
+                    width: 100%;
+                    /* Height of the footer*/
+                    height: 40px;
+                    background: grey;
+                }
+
+                --
+            }
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="main">
+        <div class="container-fluid w-100">
+            <div class="row my-2">
+                <div class="col-4">
+                    <img src="/logo">
+                </div>
+                <div class="col-6">
+                    {{!-- <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Black Mode?</label>
+                    </div> --}}
+                </div>
+                <div class="col-2">
+
+                    <div class="icon text-center ">
+                        <i class="text-center fal fa-user"></i>
+                        <p class="p-0 m-0">Welcome Joe</p>
+                        <button class="btn btn-outline-dark p-2 m-0" onclick="logout()">log out</button>
+                    </div>
+                    <div class="">
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="" style="display: flex; justify-content:space-around;flex-wrap:wrap">
+            <div class="border">
+                <h3 class="text-center mt-1">Monthly Sales Chart </h3>
+                <h4 class="text-center" id="total"></h4>
+                <img src="/image" alt="dsds" height="400px" width="100%">
+            </div>
+            <div class="border w-50">
+                <div class="border" style="display: flex;">
+                    <div class="text-center"
+                        style="background-color: gray; display:flex;justify-content:center; height: 250px; width:250px; align-items:center">
+                        <i class="far fa-cube fa-3x text-light"></i>
+                    </div>
+                    <div class="w-75">
+                        <h3 class="text-center mt-3">Refinance </h3>
+                        <h4 class="text-center mt-3" id="refinance"></h4>
+
+
+                    </div>
+                </div>
+                <div class="mt-2 border" style="display: flex;">
+                    <div class="text-center"
+                        style="background-color: gray; display:flex;justify-content:center; height: 250px; width:250px; align-items:center">
+                        <i class="far fa-coins fa-3x text-light"></i>
+                    </div>
+                    <div class="w-75">
+                        <h3 class="text-center mt-3">Purchase </h3>
+                        <h4 class="text-center mt-3" id="purchase"></h4>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="messages container-fluid border my-4">
+            <h2 class="text-center">Messages</h2>
+            <div class="search" style="display: flex;">
+                <input type="text" class="form-control w-100 " id="search" placeholder="Search" />
+                <button class="btn btn-success">Search</button>
+
+            </div>
+            <div class="display row my-5" id="displayMsg">
+            </div>
+
+
+
+        </div>
+
+        <div class="" id="footer" style="background-color: gray;">
+            <h3 class="text-center">2002-2021 Amerisave Mortgage Corporation All Rights Reserved</h3>
+        </div>
+    </div>
+
+
+    <script>
+        var userMessages = [];
+        var total = [];
+        window.onload = function () {
+            if (!localStorage.getItem("user")) {
+                window.location.replace("/");
+
+            } else {
+                var msgBody = document.getElementById("displayMsg")
+                fetch("/api/messages").then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+                    console.log(data);
+                    userMessages = data;
+                    for (var i = 0; i < userMessages.length; i++) {
+                        var messages = `
+            <div class="col-2"><i class="mx-4 fal fa-user fa-5x"></i></div>
+                <div class="col-8">
+                    <h3> ${userMessages[i].from}</h3>
+                    <p>${userMessages[i].message}</p>
+                </div>
+                <div class="col-2">
+                    <h3>${userMessages[i].timestamp}</h3>
+                </div>
+            `
+                        msgBody.innerHTML += messages;
+                    }
+                }).catch(function () {
+                    console.log("Booo");
+                });
+
+                fetch("/api/monthly-sales-data").then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+                    console.log(data);
+                    total = data;
+                    var sum = 0;
+                    var refinance = 0;
+                    var purchase = 0;
+                    var totalSales = document.getElementById("total")
+                    var totalRefinance = document.getElementById("refinance")
+                    var totalPurchase = document.getElementById("purchase")
+                    for (var i = 0; i < total.length; i++) {
+                        sum = sum + total[i].refinance + total[i].purchase
+                        refinance = refinance + total[i].refinance;
+                        purchase = purchase + total[i].purchase;
+                    }
+                    totalSales.innerHTML = `$ ${sum}`;
+                    totalRefinance.innerHTML = `$ ${refinance}`;
+                    totalPurchase.innerHTML = `$ ${purchase}`;
+                }).catch(function () {
+                    console.log("Booo");
+                });
+
+            }
+        }
+
+        function logout(){
+            localStorage.clear();
+            location.reload();
+        }
+
+
+    </script>
+</body>
+
+</html>

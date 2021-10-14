@@ -1,0 +1,32 @@
+[
+  {
+    "from": "missy",
+    "message": "Hello Joe, how is the project for Roxy coming along? Do you know when can we expect it to be completed?",
+    "timestamp": "9:37am"
+  },
+  {
+    "from": "mac",
+    "message": "Hello Joe, How is your morning going along so far? Did you hear from Jane about the new authentication tool we need to build?",
+    "timestamp": "10:19am"
+  },
+  {
+    "from": "shak",
+    "message": "Hey Joe, Can we go to lunch today at around 1 pm? Let me know if that would work for you?",
+    "timestamp": "11:25am"
+  },
+  {
+    "from": "Jane",
+    "message": "Hey Joe, Mac reached out to me and he was curious if I had shared the authentication tools details with you. Can you ping him and let him know we had a call about this yesterday.",
+    "timestamp": "3:14pm"
+  },
+  {
+    "from": "vaani",
+    "message": "Hello Joe, The testing for the twp pages are complete. They look fine except for few design issues on mobile layout, I have documented it, once you have fixed tem let me know.",
+    "timestamp": "4:27pm"
+  },
+  {
+    "from": "edward",
+    "message": "Joe, Can we talk tomorrow about the test performance of Jade. Did you get a chance to evaluate her examity answers?",
+    "timestamp": "5:12pm"
+  }
+]
