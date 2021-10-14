@@ -12,7 +12,7 @@ to start this app
 This code can still be improved with more time.
 
 View code source at my github page
-
+https://github.com/ugoh2kelechi/AmeriSaveAppPublic
 
 thanks
 Kester
